@@ -1,0 +1,9 @@
+[Unit]
+Description=Set NVIDIA GPU Power Limit
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nvidia-smi -pl 500
+
+[Install]
+WantedBy=multi-user.target
