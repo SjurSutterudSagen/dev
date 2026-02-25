@@ -18,6 +18,7 @@ if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
 	echo "2: Secondary monitor only"
 	echo
 	echo "Requires hyprctl to be installed and available in PATH."
+
 	exit 0
 fi
 
