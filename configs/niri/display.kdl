@@ -1,0 +1,15 @@
+output "ASUSTek COMPUTER INC PG32UCDM S6LMQS020784" {
+    mode "3840x2160@240.016"
+    transform "normal"
+    variable-refresh-rate
+    scale 1.25
+    position x=0 y=0
+}
+
+output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 0x01010101" {
+    mode "3840x2160@120.000"
+    transform "normal"
+    position x=-3072 y=0
+    variable-refresh-rate
+    scale 1.25
+}
