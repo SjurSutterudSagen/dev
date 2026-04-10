@@ -3,6 +3,7 @@
 # Define monitor description to match against hyprctl output
 PRIMARY_DESC="ASUSTek COMPUTER INC PG32UCDM S6LMQS020784"
 PRIMARY_TARGET="desc:$PRIMARY_DESC"
+PRIMARY_CONFIG=", highrr, auto, 1.5, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation, 0.98"
 
 # Exit codes
 EXIT_MISSING_DEPS=2
@@ -49,11 +50,11 @@ if [ -z "$CURRENT_TRANSFORM" ]; then
 fi
 
 if [ "$CURRENT_TRANSFORM" = "1" ]; then
-	hyprctl keyword monitor "$PRIMARY_TARGET,highrr,auto,1.5,bitdepth,10,cm,hdr" >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $PRIMARY_TARGET $PRIMARY_CONFIG >/dev/null || exit $EXIT_HYPRCTL_FAILED
 
 	echo "Set primary monitor to landscape orientation"
 else
-	hyprctl keyword monitor "$PRIMARY_TARGET,highrr,auto,1.5,bitdepth,10,cm,hdr,transform,1" >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $PRIMARY_TARGET $PRIMARY_CONFIG ,transform,1 >/dev/null || exit $EXIT_HYPRCTL_FAILED
 
 	echo "Set primary monitor to portrait orientation"
 fi

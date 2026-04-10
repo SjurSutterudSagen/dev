@@ -43,21 +43,23 @@ if [ -n "$1" ]; then
 fi
 
 PRIMARY_TARGET="desc:$PRIMARY_DESC"
+PRIMARY_CONFIG=", highrr, auto, 1.5, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation, 0.98"
 SECONDARY_TARGET="desc:$SECONDARY_DESC"
+SECONDARY_CONFIG=", preferred, auto-left, 1.5"
 
 if [ "$MODE" = "primary" ]; then
-	hyprctl keyword monitor "$PRIMARY_TARGET,highrr,auto,1.5,bitdepth,10,cm,hdr" >/dev/null || exit $EXIT_HYPRCTL_FAILED
-	hyprctl keyword monitor "$SECONDARY_TARGET,disabled" >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $PRIMARY_TARGET $PRIMARY_CONFIG >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $SECONDARY_TARGET, disabled >/dev/null || exit $EXIT_HYPRCTL_FAILED
 
 	echo "Switched to primary monitor only"
 elif [ "$MODE" = "secondary" ]; then
-	hyprctl keyword monitor "$PRIMARY_TARGET,disabled" >/dev/null || exit $EXIT_HYPRCTL_FAILED
-	hyprctl keyword monitor "$SECONDARY_TARGET,preferred,auto-left,1.5" >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $PRIMARY_TARGET, disabled >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $SECONDARY_TARGET $SECONDARY_CONFIG >/dev/null || exit $EXIT_HYPRCTL_FAILED
 
 	echo "Switched to secondary monitor only"
 else
-	hyprctl keyword monitor "$PRIMARY_TARGET,highrr,auto,1.5,bitdepth,10,cm,hdr" >/dev/null || exit $EXIT_HYPRCTL_FAILED
-	hyprctl keyword monitor "$SECONDARY_TARGET,preferred,auto-left,1.5" >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $PRIMARY_TARGET $PRIMARY_CONFIG >/dev/null || exit $EXIT_HYPRCTL_FAILED
+	hyprctl keyword monitor $SECONDARY_TARGET $SECONDARY_CONFIG >/dev/null || exit $EXIT_HYPRCTL_FAILED
 
 	echo "Switched to dual monitors"
 fi
